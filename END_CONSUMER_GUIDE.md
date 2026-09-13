@@ -26,7 +26,7 @@ The consumer must never obtain SMB administrative access. All catalog, order, pa
 - The preference is stored under localStorage key marxia-language.
 - New UI must use semantic keys and the documented data-i18n attributes.
 - Consumer-entered data, business names, product names, addresses, currency values, and identifiers must not be translated.
-- Page-specific keys must be registered when the storefront is? Actually no: Page-specific keys must be registered when the storefront is built.
+- Page-specific keys must be registered when the storefront is built.
 
 ## Required security and privacy boundary
 

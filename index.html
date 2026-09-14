@@ -1,1 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#6f2cff">
+  <title>Marxia · Consumer Marketplace</title>
+  <style>
+    :root{--ink:#242433;--muted:#6c6c78;--paper:#f6f4ef;--card:#fff;--navy:#17172b;--gold:#d89a31;--line:#e7e1d7}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Arial,sans-serif;background:var(--paper);color:var(--ink)}
+    button{font:inherit}.splash{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;background:linear-gradient(135deg,#ff3d81 0%,#ff8a00 28%,#ffd43b 50%,#00c9a7 72%,#6f2cff 100%)}
+    .splash::before{content:"";position:absolute;inset:-20%;background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.36),transparent 22%),radial-gradient(circle at 80% 20%,rgba(255,229,94,.42),transparent 20%),radial-gradient(circle at 70% 80%,rgba(70,255,213,.34),transparent 24%);animation:colorFloat 6s ease-in-out infinite alternate}
+    .splash[hidden]{display:none}.tiles{position:absolute;inset:0;display:grid;grid-template-columns:repeat(10,1fr);grid-template-rows:repeat(10,1fr)}
+    .tile{background:#6f2cff;border:1px solid rgba(255,255,255,.16);transition:transform .52s cubic-bezier(.2,.75,.25,1),opacity .45s ease}
+    .tile:nth-child(5n+1){background:#ff3d81}.tile:nth-child(5n+2){background:#ff8a00}.tile:nth-child(5n+3){background:#ffd43b}.tile:nth-child(5n+4){background:#00c9a7}.tile:nth-child(5n){background:#6f2cff}
+    .tile--hide{transform:scale(0) rotate(15deg);opacity:0}.welcome{position:relative;z-index:2;max-width:760px;margin:20px;padding:clamp(30px,6vw,62px);border:1px solid rgba(255,255,255,.45);border-radius:34px;background:rgba(31,20,63,.34);box-shadow:0 28px 90px rgba(42,12,72,.3);backdrop-filter:blur(12px);text-align:center;color:#fff;transition:opacity .38s ease,transform .38s ease}
+    .welcome--hide{opacity:0;transform:translateY(-8px)}.mark{display:grid;place-items:center;width:76px;height:76px;margin:0 auto 20px;border:2px solid rgba(255,255,255,.85);border-radius:24px;background:linear-gradient(135deg,#ffd43b,#ff7a00);box-shadow:0 12px 38px rgba(255,177,0,.42);color:#4a176c;font-size:34px;font-weight:900}
+    .welcome h1{font-size:clamp(2.35rem,6vw,4.8rem);line-height:.98;letter-spacing:-.045em;text-shadow:0 4px 24px rgba(55,18,73,.32)}.welcome p{max-width:610px;margin:18px auto 0;color:#fff;font-size:clamp(1.05rem,2.3vw,1.35rem);line-height:1.5}.gratitude{display:inline-flex;margin-bottom:16px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.2);font-weight:800;letter-spacing:.04em}
+    @keyframes colorFloat{to{transform:translate3d(4%,3%,0) rotate(4deg)}}
+    .topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:18px;padding:16px clamp(18px,5vw,64px);background:rgba(255,255,255,.9);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+    .brand{display:flex;align-items:center;gap:10px;font-size:1.25rem;font-weight:800}.brand-badge{display:grid;place-items:center;width:38px;height:38px;border-radius:13px;background:var(--navy);color:var(--gold)}
+    .search{flex:1;max-width:620px;margin:auto}.search input{width:100%;padding:13px 17px;border:1px solid var(--line);border-radius:999px;background:#faf9f6;font-size:1rem}
+    .actions{display:flex;gap:8px}.icon-btn{border:1px solid var(--line);background:#fff;border-radius:50%;width:42px;height:42px;cursor:pointer}
+    main{max-width:1200px;margin:auto;padding:clamp(28px,5vw,64px) clamp(18px,4vw,40px)}
+    .hero{display:grid;grid-template-columns:1.4fr .6fr;min-height:330px;border-radius:28px;overflow:hidden;background:var(--navy);color:#fff}
+    .hero-copy{padding:clamp(34px,6vw,72px)}.eyebrow{color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:.78rem}
+    .hero h2{max-width:650px;margin-top:12px;font-size:clamp(2.1rem,5vw,4.2rem);line-height:.98;letter-spacing:-.05em}.hero p{max-width:580px;margin-top:20px;color:#d1d0d9;line-height:1.6}
+    .cta{display:inline-block;margin-top:26px;padding:13px 20px;border:0;border-radius:999px;background:var(--gold);color:#18131c;font-weight:800;text-decoration:none}
+    .hero-art{display:grid;place-items:center;background:radial-gradient(circle,#d89a31 0 3%,transparent 4%),linear-gradient(135deg,#2b2b49,#17172b);font-size:clamp(5rem,13vw,10rem)}
+    .section-head{display:flex;justify-content:space-between;align-items:end;margin:52px 0 20px}.section-head h2{font-size:clamp(1.6rem,3vw,2.3rem)}.section-head a{color:var(--ink)}
+    .products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.product{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(40,32,22,.06)}
+    .product-image{display:grid;place-items:center;aspect-ratio:1;background:linear-gradient(145deg,#f4e9d7,#e7d4b8);font-size:5rem}.product-body{padding:17px}.product h3{font-size:1.05rem}.meta{display:flex;justify-content:space-between;align-items:center;margin-top:10px}.price{font-weight:800}.add{border:0;border-radius:999px;padding:9px 13px;background:var(--navy);color:#fff;cursor:pointer}
+    .skip{position:absolute;right:22px;bottom:22px;z-index:3;padding:9px 14px;border:1px solid rgba(255,255,255,.35);border-radius:999px;background:rgba(0,0,0,.18);color:#fff;cursor:pointer}
+    @media(max-width:820px){.search{display:none}.actions{margin-left:auto}.hero{grid-template-columns:1fr}.hero-art{min-height:170px}.products{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:480px){.products{grid-template-columns:1fr}.hero-copy{padding:34px 24px}.topbar{gap:10px}.icon-btn:first-child{display:none}}
+    @media(prefers-reduced-motion:reduce){.tile,.welcome{transition:none}.splash{display:none}}
+  </style>
+</head>
+<body>
+  <div class="splash" id="splash" role="status" aria-live="polite" aria-label="Marxia marketplace is loading">
+    <div class="tiles" id="tiles" aria-hidden="true"></div>
+    <div class="welcome" id="welcome">
+      <div class="mark">M</div>
+      <span class="gratitude" data-i18n="consumer.thankYou">Thank you for choosing us!</span>
+      <h1 data-i18n="consumer.welcome">Welcome to Marxia</h1>
+      <p data-i18n="consumer.loading">Your marketplace is ready—discover local products made for you.</p>
+    </div>
+    <button class="skip" id="skip" type="button" data-i18n="consumer.skip">Skip</button>
+  </div>
 
+  <header class="topbar">
+    <div class="brand"><span class="brand-badge">M</span>Marxia</div>
+    <label class="search"><span hidden>Search</span><input data-i18n-placeholder="consumer.search" placeholder="Search products and stores"></label>
+    <div class="actions">
+      <button class="icon-btn" type="button" aria-label="Language" id="language">ES</button>
+      <button class="icon-btn" type="button" aria-label="Shopping bag">🛍️</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow" data-i18n="consumer.eyebrow">Local marketplace</div>
+        <h2 data-i18n="consumer.hero">Everything you need, closer to home.</h2>
+        <p data-i18n="consumer.heroText">Discover products from trusted local businesses and choose pickup or delivery.</p>
+        <a class="cta" href="#featured" data-i18n="consumer.shop">Shop featured products</a>
+      </div>
+      <div class="hero-art" aria-hidden="true">🛍️</div>
+    </section>
+
+    <section id="featured">
+      <div class="section-head"><h2 data-i18n="consumer.featured">Featured products</h2><a href="#" data-i18n="consumer.viewAll">View all</a></div>
+      <div class="products">
+        <article class="product"><div class="product-image" aria-hidden="true">☕</div><div class="product-body"><h3>Andean Coffee</h3><div class="meta"><span class="price">$8.50</span><button class="add" type="button" data-i18n="consumer.add">Add</button></div></div></article>
+        <article class="product"><div class="product-image" aria-hidden="true">🥖</div><div class="product-body"><h3>Fresh Bread</h3><div class="meta"><span class="price">$3.25</span><button class="add" type="button" data-i18n="consumer.add">Add</button></div></div></article>
+        <article class="product"><div class="product-image" aria-hidden="true">🍊</div><div class="product-body"><h3>Local Oranges</h3><div class="meta"><span class="price">$4.75</span><button class="add" type="button" data-i18n="consumer.add">Add</button></div></div></article>
+        <article class="product"><div class="product-image" aria-hidden="true">🧀</div><div class="product-body"><h3>Artisan Cheese</h3><div class="meta"><span class="price">$6.90</span><button class="add" type="button" data-i18n="consumer.add">Add</button></div></div></article>
+      </div>
+    </section>
+  </main>
+
+  <script src="i18n.js"></script>
+  <script>
+    (() => {
+      const copy = {
+        en: {"consumer.thankYou":"Thank you for choosing us!","consumer.welcome":"Welcome to Marxia","consumer.loading":"Your marketplace is ready—discover local products made for you.","consumer.skip":"Skip","consumer.search":"Search products and stores","consumer.eyebrow":"Local marketplace","consumer.hero":"Everything you need, closer to home.","consumer.heroText":"Discover products from trusted local businesses and choose pickup or delivery.","consumer.shop":"Shop featured products","consumer.featured":"Featured products","consumer.viewAll":"View all","consumer.add":"Add"},
+        es: {"consumer.thankYou":"¡Gracias por elegirnos!","consumer.welcome":"Bienvenido a Marxia","consumer.loading":"Tu mercado está listo—descubre productos locales pensados para ti.","consumer.skip":"Omitir","consumer.search":"Buscar productos y tiendas","consumer.eyebrow":"Mercado local","consumer.hero":"Todo lo que necesitas, más cerca de casa.","consumer.heroText":"Descubre productos de negocios locales de confianza y elige retiro o entrega.","consumer.shop":"Ver productos destacados","consumer.featured":"Productos destacados","consumer.viewAll":"Ver todos","consumer.add":"Agregar"}
+      };
+      Object.entries(copy).forEach(([locale,messages]) => window.MarxiaI18n?.register(locale,messages));
+      window.MarxiaI18n?.localize();
+
+      const splash=document.getElementById("splash"),tilesHost=document.getElementById("tiles"),welcome=document.getElementById("welcome");
+      let completed=false,timers=[];
+      const finish=()=>{if(completed)return;completed=true;timers.forEach(clearTimeout);splash.hidden=true;document.getElementById("main").focus?.();};
+      for(let i=0;i<100;i++){const tile=document.createElement("span");tile.className="tile";tilesHost.appendChild(tile)}
+      const begin=()=>{welcome.classList.add("welcome--hide");[...tilesHost.children].forEach(tile=>{const timer=setTimeout(()=>tile.classList.add("tile--hide"),Math.random()*650);timers.push(timer)});timers.push(setTimeout(finish,1250))};
+      if(matchMedia("(prefers-reduced-motion: reduce)").matches){finish()}else{timers.push(setTimeout(begin,1800))}
+      document.getElementById("skip").addEventListener("click",finish);
+      document.getElementById("language").addEventListener("click",event=>{const next=window.MarxiaI18n.language==="en"?"es":"en";window.MarxiaI18n.setLanguage(next);event.currentTarget.textContent=next==="en"?"ES":"EN"});
+    })();
+  </script>
+</body>
+</html>

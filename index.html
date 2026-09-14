@@ -3,18 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#17172b">
+  <meta name="theme-color" content="#6f2cff">
   <title>Marxia · Consumer Marketplace</title>
   <style>
     :root{--ink:#242433;--muted:#6c6c78;--paper:#f6f4ef;--card:#fff;--navy:#17172b;--gold:#d89a31;--line:#e7e1d7}
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:Arial,sans-serif;background:var(--paper);color:var(--ink)}
-    button{font:inherit}.splash{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;background:var(--navy)}
+    button{font:inherit}.splash{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;background:linear-gradient(135deg,#ff3d81 0%,#ff8a00 28%,#ffd43b 50%,#00c9a7 72%,#6f2cff 100%)}
+    .splash::before{content:"";position:absolute;inset:-20%;background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.36),transparent 22%),radial-gradient(circle at 80% 20%,rgba(255,229,94,.42),transparent 20%),radial-gradient(circle at 70% 80%,rgba(70,255,213,.34),transparent 24%);animation:colorFloat 6s ease-in-out infinite alternate}
     .splash[hidden]{display:none}.tiles{position:absolute;inset:0;display:grid;grid-template-columns:repeat(10,1fr);grid-template-rows:repeat(10,1fr)}
-    .tile{background:var(--navy);border:1px solid rgba(255,255,255,.035);transition:transform .52s cubic-bezier(.2,.75,.25,1),opacity .45s ease}
-    .tile--hide{transform:scale(0) rotate(15deg);opacity:0}.welcome{position:relative;z-index:2;text-align:center;color:#fff;transition:opacity .38s ease,transform .38s ease}
-    .welcome--hide{opacity:0;transform:translateY(-8px)}.mark{display:grid;place-items:center;width:68px;height:68px;margin:0 auto 18px;border:2px solid var(--gold);border-radius:22px;color:var(--gold);font-size:30px;font-weight:800}
-    .welcome h1{font-size:clamp(2rem,6vw,4.5rem);letter-spacing:-.04em}.welcome p{margin-top:12px;color:#d8d7df;font-size:clamp(1rem,2vw,1.2rem)}
+    .tile{background:#6f2cff;border:1px solid rgba(255,255,255,.16);transition:transform .52s cubic-bezier(.2,.75,.25,1),opacity .45s ease}
+    .tile:nth-child(5n+1){background:#ff3d81}.tile:nth-child(5n+2){background:#ff8a00}.tile:nth-child(5n+3){background:#ffd43b}.tile:nth-child(5n+4){background:#00c9a7}.tile:nth-child(5n){background:#6f2cff}
+    .tile--hide{transform:scale(0) rotate(15deg);opacity:0}.welcome{position:relative;z-index:2;max-width:760px;margin:20px;padding:clamp(30px,6vw,62px);border:1px solid rgba(255,255,255,.45);border-radius:34px;background:rgba(31,20,63,.34);box-shadow:0 28px 90px rgba(42,12,72,.3);backdrop-filter:blur(12px);text-align:center;color:#fff;transition:opacity .38s ease,transform .38s ease}
+    .welcome--hide{opacity:0;transform:translateY(-8px)}.mark{display:grid;place-items:center;width:76px;height:76px;margin:0 auto 20px;border:2px solid rgba(255,255,255,.85);border-radius:24px;background:linear-gradient(135deg,#ffd43b,#ff7a00);box-shadow:0 12px 38px rgba(255,177,0,.42);color:#4a176c;font-size:34px;font-weight:900}
+    .welcome h1{font-size:clamp(2.35rem,6vw,4.8rem);line-height:.98;letter-spacing:-.045em;text-shadow:0 4px 24px rgba(55,18,73,.32)}.welcome p{max-width:610px;margin:18px auto 0;color:#fff;font-size:clamp(1.05rem,2.3vw,1.35rem);line-height:1.5}.gratitude{display:inline-flex;margin-bottom:16px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.2);font-weight:800;letter-spacing:.04em}
+    @keyframes colorFloat{to{transform:translate3d(4%,3%,0) rotate(4deg)}}
     .topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:18px;padding:16px clamp(18px,5vw,64px);background:rgba(255,255,255,.9);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
     .brand{display:flex;align-items:center;gap:10px;font-size:1.25rem;font-weight:800}.brand-badge{display:grid;place-items:center;width:38px;height:38px;border-radius:13px;background:var(--navy);color:var(--gold)}
     .search{flex:1;max-width:620px;margin:auto}.search input{width:100%;padding:13px 17px;border:1px solid var(--line);border-radius:999px;background:#faf9f6;font-size:1rem}
@@ -39,8 +42,9 @@
     <div class="tiles" id="tiles" aria-hidden="true"></div>
     <div class="welcome" id="welcome">
       <div class="mark">M</div>
+      <span class="gratitude" data-i18n="consumer.thankYou">Thank you for choosing us!</span>
       <h1 data-i18n="consumer.welcome">Welcome to Marxia</h1>
-      <p data-i18n="consumer.loading">Preparing your marketplace…</p>
+      <p data-i18n="consumer.loading">Your marketplace is ready—discover local products made for you.</p>
     </div>
     <button class="skip" id="skip" type="button" data-i18n="consumer.skip">Skip</button>
   </div>
@@ -80,8 +84,8 @@
   <script>
     (() => {
       const copy = {
-        en: {"consumer.welcome":"Welcome to Marxia","consumer.loading":"Preparing your marketplace…","consumer.skip":"Skip","consumer.search":"Search products and stores","consumer.eyebrow":"Local marketplace","consumer.hero":"Everything you need, closer to home.","consumer.heroText":"Discover products from trusted local businesses and choose pickup or delivery.","consumer.shop":"Shop featured products","consumer.featured":"Featured products","consumer.viewAll":"View all","consumer.add":"Add"},
-        es: {"consumer.welcome":"Bienvenido a Marxia","consumer.loading":"Preparando tu mercado…","consumer.skip":"Omitir","consumer.search":"Buscar productos y tiendas","consumer.eyebrow":"Mercado local","consumer.hero":"Todo lo que necesitas, más cerca de casa.","consumer.heroText":"Descubre productos de negocios locales de confianza y elige retiro o entrega.","consumer.shop":"Ver productos destacados","consumer.featured":"Productos destacados","consumer.viewAll":"Ver todos","consumer.add":"Agregar"}
+        en: {"consumer.thankYou":"Thank you for choosing us!","consumer.welcome":"Welcome to Marxia","consumer.loading":"Your marketplace is ready—discover local products made for you.","consumer.skip":"Skip","consumer.search":"Search products and stores","consumer.eyebrow":"Local marketplace","consumer.hero":"Everything you need, closer to home.","consumer.heroText":"Discover products from trusted local businesses and choose pickup or delivery.","consumer.shop":"Shop featured products","consumer.featured":"Featured products","consumer.viewAll":"View all","consumer.add":"Add"},
+        es: {"consumer.thankYou":"¡Gracias por elegirnos!","consumer.welcome":"Bienvenido a Marxia","consumer.loading":"Tu mercado está listo—descubre productos locales pensados para ti.","consumer.skip":"Omitir","consumer.search":"Buscar productos y tiendas","consumer.eyebrow":"Mercado local","consumer.hero":"Todo lo que necesitas, más cerca de casa.","consumer.heroText":"Descubre productos de negocios locales de confianza y elige retiro o entrega.","consumer.shop":"Ver productos destacados","consumer.featured":"Productos destacados","consumer.viewAll":"Ver todos","consumer.add":"Agregar"}
       };
       Object.entries(copy).forEach(([locale,messages]) => window.MarxiaI18n?.register(locale,messages));
       window.MarxiaI18n?.localize();

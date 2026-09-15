@@ -64,7 +64,7 @@
   <header class="topbar">
     <div class="top-brand"><span class="top-mark">M</span>Marxia</div>
     <label class="search"><span hidden>Buscar</span><input id="search" placeholder="Buscar productos y tiendas"></label>
-    <div class="actions"><button class="icon-btn" id="page-language" type="button" aria-label="Cambiar idioma">EN</button><button class="icon-btn" type="button" aria-label="Bolsa de compras">🛍️</button></div>
+    <div class="actions"><button class="icon-btn" id="page-language" type="button" aria-label="Cambiar idioma">EN</button><button class="icon-btn" id="page-theme" type="button" aria-label="Activar tema oscuro" title="Tema oscuro"><span aria-hidden="true">☾</span></button><button class="icon-btn" type="button" aria-label="Bolsa de compras">🛍️</button></div>
   </header>
   <main id="catalog" tabindex="-1">
     <section class="products" aria-label="Productos">
@@ -80,10 +80,10 @@
       for(let i=0;i<88;i++){const tile=document.createElement("span");tile.className="tile";tile.style.setProperty("--turn",(i%2?1:-1)*(12+(i%5)*5)+"deg");mosaic.appendChild(tile)}
       const setPressed=(group,id)=>group.forEach(x=>x.setAttribute("aria-pressed",String(x.id===id)));
       const setLanguage=lang=>{locale=lang;document.documentElement.lang=lang;document.querySelectorAll("[data-copy]").forEach(el=>el.textContent=text[lang][el.dataset.copy]);document.getElementById("search").placeholder=text[lang].search;document.getElementById("page-language").textContent=lang==="es"?"EN":"ES";setPressed([document.getElementById("lang-en"),document.getElementById("lang-es")],"lang-"+lang)};
-      const setTheme=theme=>{document.documentElement.dataset.theme=theme;setPressed([document.getElementById("theme-light"),document.getElementById("theme-dark")],"theme-"+theme)};
-      document.getElementById("lang-en").onclick=()=>setLanguage("en");document.getElementById("lang-es").onclick=()=>setLanguage("es");document.getElementById("theme-light").onclick=()=>setTheme("light");document.getElementById("theme-dark").onclick=()=>setTheme("dark");document.getElementById("page-language").onclick=()=>setLanguage(locale==="es"?"en":"es");
+      const setTheme=(theme,persist=true)=>{document.documentElement.dataset.theme=theme;setPressed([document.getElementById("theme-light"),document.getElementById("theme-dark")],"theme-"+theme);const toggle=document.getElementById("page-theme");const dark=theme==="dark";toggle.querySelector("span").textContent=dark?"☀":"☾";toggle.setAttribute("aria-label",dark?(locale==="es"?"Activar tema claro":"Activate light theme"):(locale==="es"?"Activar tema oscuro":"Activate dark theme"));toggle.title=dark?(locale==="es"?"Tema claro":"Light theme"):(locale==="es"?"Tema oscuro":"Dark theme");if(persist){try{localStorage.setItem("marxia-theme",theme)}catch(_){}}};
+      document.getElementById("lang-en").onclick=()=>setLanguage("en");document.getElementById("lang-es").onclick=()=>setLanguage("es");document.getElementById("theme-light").onclick=()=>setTheme("light");document.getElementById("theme-dark").onclick=()=>setTheme("dark");document.getElementById("page-language").onclick=()=>setLanguage(locale==="es"?"en":"es");document.getElementById("page-theme").onclick=()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark");
       enter.onclick=()=>{if(running)return;running=true;enter.disabled=true;copy.classList.add("exit");previews.classList.add("exit");[...mosaic.children].forEach((tile,i)=>setTimeout(()=>tile.classList.add("reveal"),Math.random()*1750+i%7*45));setTimeout(()=>{splash.hidden=true;document.getElementById("catalog").focus()},3000)};
-      setLanguage("es");setTheme("light");
+      setLanguage("es");let savedTheme="light";try{savedTheme=localStorage.getItem("marxia-theme")||"light"}catch(_){}setTheme(savedTheme==="dark"?"dark":"light",false);
     })();
   </script>
 </body>

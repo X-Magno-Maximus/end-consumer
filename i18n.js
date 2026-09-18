@@ -10,6 +10,12 @@
     "common.appearance": "Appearance",
     "common.light": "Light",
     "common.dark": "Dark",
+    "page.title": "Marxia · Consumer Marketplace",
+    "catalog.searchLabel": "Search",
+    "action.selectEnglish": "Select English",
+    "action.selectSpanish": "Select Spanish",
+    "theme.darkTitle": "Dark theme",
+    "theme.lightTitle": "Light theme",
     "welcome.preferences": "Welcome preferences",
     "welcome.thanks": "Thank you for choosing Marxia",
     "welcome.headline": "Everything you need, closer to home.",
@@ -37,6 +43,12 @@
     "common.appearance": "Apariencia",
     "common.light": "Claro",
     "common.dark": "Oscuro",
+    "page.title": "Marxia · Mercado para consumidores",
+    "catalog.searchLabel": "Buscar",
+    "action.selectEnglish": "Seleccionar inglés",
+    "action.selectSpanish": "Seleccionar español",
+    "theme.darkTitle": "Tema oscuro",
+    "theme.lightTitle": "Tema claro",
     "welcome.preferences": "Preferencias de bienvenida",
     "welcome.thanks": "Gracias por elegir Marxia",
     "welcome.headline": "Todo lo que necesitas, más cerca de casa.",
@@ -71,6 +83,7 @@
     root.querySelectorAll("[data-i18n-placeholder]").forEach(el => { el.placeholder = t(el.dataset.i18nPlaceholder); });
     root.querySelectorAll("[data-i18n-label]").forEach(el => { el.setAttribute("aria-label", t(el.dataset.i18nLabel)); });
     root.querySelectorAll("[data-i18n-title]").forEach(el => { el.title = t(el.dataset.i18nTitle); });
+    document.title = t("page.title");
     document.dispatchEvent(new CustomEvent("marxia:languagechange", { detail: { language } }));
   };
   const setLanguage = locale => {

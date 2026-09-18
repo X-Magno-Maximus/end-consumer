@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#6d214f">
-  <title>Marxia · Mercado para consumidores</title>
+  <title data-i18n="page.title">Marxia · Consumer Marketplace</title>
   <style>
     :root{--ink:#27202a;--muted:#746b75;--paper:#f7f3f2;--card:#fff;--wine:#6d214f;--plum:#40243f;--rose:#b95878;--sage:#7c9b88;--teal:#397b78;--line:#e7dddf;--shadow:0 18px 50px rgba(62,34,55,.12)}
     html[data-theme="dark"]{--ink:#f5edf2;--muted:#c4b7c0;--paper:#181419;--card:#262027;--line:#40343e;--shadow:0 18px 50px rgba(0,0,0,.32)}
@@ -34,54 +34,54 @@
 <body>
   <section class="splash" id="splash" aria-labelledby="welcome-title">
     <div class="mosaic" id="mosaic" aria-hidden="true"></div><div class="veil" aria-hidden="true"></div>
-    <div class="preferences" aria-label="Welcome preferences">
-      <div class="selector" aria-label="Language">
-        <button class="choice" id="lang-en" type="button" aria-pressed="false">EN</button>
-        <button class="choice" id="lang-es" type="button" aria-pressed="true">ES</button>
+    <div class="preferences" aria-label="Welcome preferences" data-i18n-label="welcome.preferences">
+      <div class="selector" aria-label="Language" data-i18n-label="common.language">
+        <button class="choice" id="lang-en" type="button" aria-pressed="false" aria-label="English" data-i18n-label="action.selectEnglish">EN</button>
+        <button class="choice" id="lang-es" type="button" aria-pressed="true" aria-label="Spanish" data-i18n-label="action.selectSpanish">ES</button>
       </div>
-      <div class="selector" aria-label="Appearance">
-        <button class="choice" id="theme-light" type="button" aria-pressed="true" data-copy="light">Claro</button>
-        <button class="choice" id="theme-dark" type="button" aria-pressed="false" data-copy="dark">Oscuro</button>
+      <div class="selector" aria-label="Appearance" data-i18n-label="common.appearance">
+        <button class="choice" id="theme-light" type="button" aria-pressed="true" data-i18n="common.light">Light</button>
+        <button class="choice" id="theme-dark" type="button" aria-pressed="false" data-i18n="common.dark">Dark</button>
       </div>
     </div>
     <div class="welcome-shell">
       <div class="welcome-copy" id="welcome-copy">
         <div class="brand"><span class="brand-mark">M</span> Marxia</div>
-        <div class="eyebrow" data-copy="thanks">Gracias por elegir Marxia</div>
-        <h1 id="welcome-title" data-copy="headline">Todo lo que necesitas, más cerca de casa.</h1>
-        <p data-copy="intro">Productos locales, negocios de confianza y opciones de retiro o entrega.</p>
-        <button class="welcome-cta" id="enter" type="button" data-copy="cta">Ordena tus Productos →→</button>
+        <div class="eyebrow" data-i18n="welcome.thanks">Thank you for choosing Marxia</div>
+        <h1 id="welcome-title" data-i18n="welcome.headline">Everything you need, closer to home.</h1>
+        <p data-i18n="welcome.intro">Local products, trusted businesses, and convenient pickup or delivery.</p>
+        <button class="welcome-cta" id="enter" type="button" data-i18n="welcome.cta">Order your products →→</button>
       </div>
-      <div class="previews" id="previews" aria-label="Vista previa de productos">
-        <article class="preview"><div class="preview-art">☕</div><div class="preview-info"><span><b data-copy="coffee">Café artesanal</b>$4.25</span><span class="plus">+</span></div></article>
-        <article class="preview"><div class="preview-art">🥖</div><div class="preview-info"><span><b data-copy="bread">Pan fresco</b>$3.90</span><span class="plus">+</span></div></article>
-        <article class="preview"><div class="preview-art">🍓</div><div class="preview-info"><span><b data-copy="berries">Frutas locales</b>$2.80</span><span class="plus">+</span></div></article>
-        <article class="preview"><div class="preview-art">🧀</div><div class="preview-info"><span><b data-copy="cheese">Queso artesanal</b>$5.60</span><span class="plus">+</span></div></article>
+      <div class="previews" id="previews" aria-label="Product preview" data-i18n-label="catalog.preview">
+        <article class="preview"><div class="preview-art">☕</div><div class="preview-info"><span><b data-i18n="product.coffee">Artisan coffee</b>$4.25</span><span class="plus">+</span></div></article>
+        <article class="preview"><div class="preview-art">🥖</div><div class="preview-info"><span><b data-i18n="product.bread">Fresh bread</b>$3.90</span><span class="plus">+</span></div></article>
+        <article class="preview"><div class="preview-art">🍓</div><div class="preview-info"><span><b data-i18n="product.berries">Local berries</b>$2.80</span><span class="plus">+</span></div></article>
+        <article class="preview"><div class="preview-art">🧀</div><div class="preview-info"><span><b data-i18n="product.cheese">Artisan cheese</b>$5.60</span><span class="plus">+</span></div></article>
       </div>
     </div>
   </section>
 
   <header class="topbar">
     <div class="top-brand"><span class="top-mark">M</span>Marxia</div>
-    <label class="search"><span hidden>Buscar</span><input id="search" placeholder="Buscar productos y tiendas"></label>
-    <div class="actions"><button class="icon-btn" id="page-language" type="button" aria-label="Cambiar idioma">EN</button><button class="icon-btn" id="page-theme" type="button" aria-label="Activar tema oscuro" title="Tema oscuro"><span aria-hidden="true">☾</span></button><button class="icon-btn" type="button" aria-label="Bolsa de compras">🛍️</button></div>
+    <label class="search"><span hidden data-i18n="catalog.searchLabel">Search</span><input id="search" placeholder="Search products and stores" data-i18n-placeholder="catalog.search"></label>
+    <div class="actions"><button class="icon-btn" id="page-language" type="button" aria-label="Change language" data-i18n-label="action.changeLanguage">ES</button><button class="icon-btn" id="page-theme" type="button" aria-label="Enable dark theme" title="Dark theme"><span aria-hidden="true">☾</span></button><button class="icon-btn" type="button" aria-label="Shopping bag" data-i18n-label="action.bag">🛍️</button></div>
   </header>
   <main id="catalog" tabindex="-1">
-    <section class="products" aria-label="Productos">
-      <article class="product"><div class="product-image">☕</div><div class="product-body"><h3 data-copy="coffee">Café artesanal</h3><div class="meta"><span class="price">$4.25</span><button class="add" data-copy="add">Agregar</button></div></div></article>
-      <article class="product"><div class="product-image">🥖</div><div class="product-body"><h3 data-copy="bread">Pan fresco</h3><div class="meta"><span class="price">$3.90</span><button class="add" data-copy="add">Agregar</button></div></div></article>
-      <article class="product"><div class="product-image">🍓</div><div class="product-body"><h3 data-copy="berries">Frutas locales</h3><div class="meta"><span class="price">$2.80</span><button class="add" data-copy="add">Agregar</button></div></div></article>
-      <article class="product"><div class="product-image">🧀</div><div class="product-body"><h3 data-copy="cheese">Queso artesanal</h3><div class="meta"><span class="price">$5.60</span><button class="add" data-copy="add">Agregar</button></div></div></article>
+    <section class="products" aria-label="Products" data-i18n-label="catalog.products">
+      <article class="product"><div class="product-image">☕</div><div class="product-body"><h3 data-i18n="product.coffee">Artisan coffee</h3><div class="meta"><span class="price">$4.25</span><button class="add" data-i18n="catalog.add">Add</button></div></div></article>
+      <article class="product"><div class="product-image">🥖</div><div class="product-body"><h3 data-i18n="product.bread">Fresh bread</h3><div class="meta"><span class="price">$3.90</span><button class="add" data-i18n="catalog.add">Add</button></div></div></article>
+      <article class="product"><div class="product-image">🍓</div><div class="product-body"><h3 data-i18n="product.berries">Local berries</h3><div class="meta"><span class="price">$2.80</span><button class="add" data-i18n="catalog.add">Add</button></div></div></article>
+      <article class="product"><div class="product-image">🧀</div><div class="product-body"><h3 data-i18n="product.cheese">Artisan cheese</h3><div class="meta"><span class="price">$5.60</span><button class="add" data-i18n="catalog.add">Add</button></div></div></article>
     </section>
   </main>
-  <script src="i18n.js"></script>
+  <script src="i18n.js?v=20260918-parity-1"></script>
   <script>
-    (()=>{const text={es:{light:"Claro",dark:"Oscuro",thanks:"Gracias por elegir Marxia",headline:"Todo lo que necesitas, más cerca de casa.",intro:"Productos locales, negocios de confianza y opciones de retiro o entrega.",cta:"Ordena tus Productos →→",coffee:"Café artesanal",bread:"Pan fresco",berries:"Frutas locales",cheese:"Queso artesanal",add:"Agregar",search:"Buscar productos y tiendas"},en:{light:"Light",dark:"Dark",thanks:"Thank you for choosing Marxia",headline:"Everything you need, closer to home.",intro:"Local products, trusted businesses, and convenient pickup or delivery.",cta:"Order your Products →→",coffee:"Artisan coffee",bread:"Fresh bread",berries:"Local berries",cheese:"Artisan cheese",add:"Add",search:"Search products and stores"}};
+    (()=>{
       const splash=document.getElementById("splash"),mosaic=document.getElementById("mosaic"),enter=document.getElementById("enter"),copy=document.getElementById("welcome-copy"),previews=document.getElementById("previews");let locale="es",running=false;
       for(let i=0;i<88;i++){const tile=document.createElement("span");tile.className="tile";tile.style.setProperty("--turn",(i%2?1:-1)*(12+(i%5)*5)+"deg");mosaic.appendChild(tile)}
       const setPressed=(group,id)=>group.forEach(x=>x.setAttribute("aria-pressed",String(x.id===id)));
-      const setLanguage=lang=>{locale=lang;window.MarxiaI18n?.setLanguage(lang);document.documentElement.lang=lang;document.querySelectorAll("[data-copy]").forEach(el=>el.textContent=text[lang][el.dataset.copy]);document.getElementById("search").placeholder=text[lang].search;document.getElementById("page-language").textContent=lang==="es"?"EN":"ES";setPressed([document.getElementById("lang-en"),document.getElementById("lang-es")],"lang-"+lang)};
-      const setTheme=(theme,persist=true)=>{document.documentElement.dataset.theme=theme;setPressed([document.getElementById("theme-light"),document.getElementById("theme-dark")],"theme-"+theme);const toggle=document.getElementById("page-theme");const dark=theme==="dark";toggle.querySelector("span").textContent=dark?"☀":"☾";toggle.setAttribute("aria-label",dark?(locale==="es"?"Activar tema claro":"Activate light theme"):(locale==="es"?"Activar tema oscuro":"Activate dark theme"));toggle.title=dark?(locale==="es"?"Tema claro":"Light theme"):(locale==="es"?"Tema oscuro":"Dark theme");if(persist){try{localStorage.setItem("marxia-theme",theme)}catch(_){}}};
+      const setLanguage=lang=>{locale=lang;window.MarxiaI18n.setLanguage(lang);document.getElementById("page-language").textContent=lang==="es"?"EN":"ES";setPressed([document.getElementById("lang-en"),document.getElementById("lang-es")],"lang-"+lang);setTheme(document.documentElement.dataset.theme||"light",false)};
+      const setTheme=(theme,persist=true)=>{document.documentElement.dataset.theme=theme;setPressed([document.getElementById("theme-light"),document.getElementById("theme-dark")],"theme-"+theme);const toggle=document.getElementById("page-theme");const dark=theme==="dark";toggle.querySelector("span").textContent=dark?"☀":"☾";toggle.setAttribute("aria-label",window.MarxiaI18n.t(dark?"action.enableLight":"action.enableDark"));toggle.title=window.MarxiaI18n.t(dark?"theme.lightTitle":"theme.darkTitle");if(persist){try{localStorage.setItem("marxia-theme",theme)}catch(_){}}};
       document.getElementById("lang-en").onclick=()=>setLanguage("en");document.getElementById("lang-es").onclick=()=>setLanguage("es");document.getElementById("theme-light").onclick=()=>setTheme("light");document.getElementById("theme-dark").onclick=()=>setTheme("dark");document.getElementById("page-language").onclick=()=>setLanguage(locale==="es"?"en":"es");document.getElementById("page-theme").onclick=()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark");
       enter.onclick=()=>{if(running)return;running=true;enter.disabled=true;copy.classList.add("exit");previews.classList.add("exit");[...mosaic.children].forEach((tile,i)=>setTimeout(()=>tile.classList.add("reveal"),Math.random()*1750+i%7*45));setTimeout(()=>{splash.hidden=true;document.getElementById("catalog").focus()},3000)};
       let savedLanguage="es";try{savedLanguage=localStorage.getItem("marxia-language")||"es"}catch(_){}setLanguage(savedLanguage==="en"?"en":"es");let savedTheme="light";try{savedTheme=localStorage.getItem("marxia-theme")||"light"}catch(_){}setTheme(savedTheme==="dark"?"dark":"light",false);
